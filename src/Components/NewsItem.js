@@ -14,7 +14,7 @@ export class NewsItem extends Component {
 
         return(
             <div className="my-3">
-            <div className="card" style={{width: '18rem'}}>
+            <div className="card">
             {/* ternary operator for image not found */}
                 <img src={!imageUrl?"https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Image_not_available.png/640px-Image_not_available.png":imageUrl} className="card-img-top" alt="..."/>
                     <div className="card-body">

@@ -1,8 +1,22 @@
 import React, { Component } from 'react'
 import NewsItem from './NewsItem'
 import Spinner from './Spinner'
+import PropTypes from 'prop-types'
+
 
 export class News extends Component {
+
+    static defaultProps = {
+        country: 'in',
+        pagesize: 9,
+        category: 'general'
+    }
+    static propTypes ={
+        country: PropTypes.string,
+        pagesize: PropTypes.number,
+        category: PropTypes.string
+    }
+
 
     // here we have made a constructor of super class..and we will use states in it...we can also pass the whole array of articles here..but we have stored it earlier and we will use it here by this keyword.
     constructor() {
@@ -21,7 +35,7 @@ export class News extends Component {
     // componentDidMount() is a lifecycle method which is a called after the render function.
     // here we will fetch the articles from the api and store them in the articles array which was blank above.
     async componentDidMount() {
-        let url = `https://newsapi.org/v2/top-headlines?country=in&apiKey=0621765271484497aa6617a36adb1b74&page=1&pagesize=${this.props.pagesize}`
+        let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=0621765271484497aa6617a36adb1b74&page=1&pagesize=${this.props.pagesize}`
         this.setState({ loading: true })         // show spinner till fetching data.
         let data = await fetch(url)             // fetch data from api
         let parsedData = await data.json()      // parse data
@@ -38,7 +52,7 @@ export class News extends Component {
 
     handlePrevClick = async () => {
         console.log("previous")
-        let url = `https://newsapi.org/v2/top-headlines?country=in&apiKey=0621765271484497aa6617a36adb1b74&page=${this.state.page - 1}&pagesize=${this.props.pagesize}`
+        let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=0621765271484497aa6617a36adb1b74&page=${this.state.page - 1}&pagesize=${this.props.pagesize}`
         this.setState({ loading: true })           // show spinner till fetching data.
         let data = await fetch(url)
         let parsedData = await data.json()
@@ -55,7 +69,7 @@ export class News extends Component {
             // nothing will happen as we dont have more articles to display
         }
         else {
-            let url = `https://newsapi.org/v2/top-headlines?country=in&apiKey=0621765271484497aa6617a36adb1b74&page=${this.state.page + 1}&pagesize=${this.props.pagesize}`
+            let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=0621765271484497aa6617a36adb1b74&page=${this.state.page + 1}&pagesize=${this.props.pagesize}`
             this.setState({ loading: true })             // show spinner till fetching data.
             let data = await fetch(url)
             let parsedData = await data.json()
@@ -70,9 +84,9 @@ export class News extends Component {
     render() {
         return (
             <div className="container my-3">
-                <h2>NewsBoy - Top Headlines</h2>
+                <h1 style={{margin: '30px 0px 30px 0px'}}>{`NewsBoy-Top Headlines ..(${this.props.category})`}</h1>
                 {/* if loading is true then show spinner.*/}
-                {this.state.loading && <Spinner />}
+                {this.state.loading && <Spinner/>}
                 <div className="row my-3">
                 {/* if loading is true then dont show news .only show when loading is false */}
                     {!this.state.loading &&this.state.articles.map((element) => {
