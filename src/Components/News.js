@@ -92,7 +92,7 @@ export class News extends Component {
                     {!this.state.loading &&this.state.articles.map((element) => {
                         return <div className="col-md-4" key={element.url}>
                             {/* ternary operator for both title and description as if they are null set them as empty string */}
-                            <NewsItem title={element.title ? element.title : ""} description={element.description ? element.description : ""} imageUrl={element.urlToImage} newsUrl={element.url} />
+                            <NewsItem title={element.title ? element.title : ""} description={element.description ? element.description : ""} imageUrl={element.urlToImage} newsUrl={element.url} date={element.publishedAt} source={element.source.name}/>
                         </div>
                     })}
                 </div>
