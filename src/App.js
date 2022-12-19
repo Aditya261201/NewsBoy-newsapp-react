@@ -9,7 +9,7 @@ import {
 } from 'react-router-dom'
 
 export default class App extends Component {
-  pagesize=3
+  pagesize=15
   render() {
     return (
       <>
