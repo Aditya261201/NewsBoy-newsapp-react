@@ -33,16 +33,20 @@ export class News extends Component {
 
 
     async updateNews() {
+        this.props.setProgress(20);  // setting progress to show on loading bar.
         this.setState({page: this.state.page + 1})
         const url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=0621765271484497aa6617a36adb1b74&page=${this.state.page}&pagesize=${this.props.pagesize}`
+        this.props.setProgress(40);  // setting progress to show on loading bar.
         this.setState({ loading: true })
         let data = await fetch(url)
+        this.props.setProgress(70);  // setting progress to show on loading bar.
         let parsedData = await data.json()
         this.setState({
             articles: parsedData.articles,
             totalResults: parsedData.totalResults,
             loading: false
         })
+        this.props.setProgress(100);  // setting progress to show on loading bar.
     }
     async componentDidMount() {
         this.updateNews();
@@ -63,7 +67,7 @@ export class News extends Component {
     render() {
         return (
             <>
-                <h1 className="text-center" style={{ margin: '30px 0px 30px 0px' }}>{`NewsBoy-Top Headlines  (${this.props.category})`}</h1>
+                <h1 className="text-center" style={{ margin: '80px 0px 30px 0px' }}>{`NewsBoy-Top Headlines  (${this.props.category})`}</h1>
                 {this.state.loading && <Spinner/>}
                 {/* added infinite scrollbar tag from its package docs.
                 its added just above map function..that is determined by docs/examples in docs */}
