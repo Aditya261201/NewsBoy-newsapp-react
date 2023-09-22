@@ -11,7 +11,7 @@ const App =()=> {
   
   
   const pagesize=6
-  const apiKey= process.env.REACT_APP_NEWS_API
+  const apiKey = "0621765271484497aa6617a36adb1b74";
   
   const [progress, setProgress] = useState(0)
 
