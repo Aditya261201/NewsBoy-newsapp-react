@@ -5,20 +5,21 @@ import Navbar from './Components/Navbar';
 import News from './Components/News';
 import {BrowserRouter,Route,Routes} from 'react-router-dom'
 import LoadingBar from 'react-top-loading-bar'
+import { useTheme } from './ThemeContext';
 
 
 const App =()=> {
   
-  
+  const {theme} = useTheme();
   const pagesize=6
   const apiKey = "0621765271484497aa6617a36adb1b74";
   
   const [progress, setProgress] = useState(0)
 
     return (
-      <>
+    <>
       <BrowserRouter>
-      <div> 
+        <div className={theme === "light" ? "bg-dark" : "bg-white"}> 
         <Navbar />
         {/* top loading bar from npm pkg */}
         <LoadingBar

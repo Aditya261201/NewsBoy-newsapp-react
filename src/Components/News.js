@@ -3,9 +3,12 @@ import NewsItem from './NewsItem'
 import Spinner from './Spinner'
 import PropTypes from 'prop-types'
 import InfiniteScroll from "react-infinite-scroll-component";
+import { useTheme } from '../ThemeContext';
 
 
 const News = (props)=> {
+
+    const { theme } = useTheme();
 
     const [articles, setArticles] = useState([])
     const [loading, setLoading] = useState(true)
@@ -45,16 +48,17 @@ const News = (props)=> {
 
         return (
             <>
-                <h1 className="text-center" style={{ margin: '80px 0px 30px 0px' }}>{`NewsBoy-Top Headlines  (${props.category})`}</h1>
+                <div style={{ margin: '55px 0px 20px 0px' }}>
+                <h1 className={theme === "light" ? "text-center text-white bg-dark" : "text-center text-dark bg-white"} style={{ margin: '0px 0px 0px 0px' }}>{`NewsBoy-Top Headlines  (${props.category})`}</h1>
                 {loading && <Spinner/>}
-
+                </div>
                 <InfiniteScroll
                     dataLength={articles.length}
                     next={fetchMoreData}
                     hasMore={articles.length !== totalResults}
                     loader={<Spinner/>}
                 >
-                    <div className="container">
+                    <div className={theme === "light" ? "container bg-dark" : "container bg-white"}>
                     <div className="row my-3">
                         {articles.map((element) => {
                             return <div className="col-md-4" key={element.url}>

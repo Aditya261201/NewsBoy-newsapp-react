@@ -1,7 +1,9 @@
 import React from "react";
+import { useTheme } from '../ThemeContext';
+
 
 const NewsItem =(props)=> {
-
+        const { theme } = useTheme();
         let { title, description, imageUrl, newsUrl, date ,source } = props;
 
         return (
@@ -17,10 +19,10 @@ const NewsItem =(props)=> {
                         className="card-img-top"
                         alt="..."
                     />
-                    <div className="card-body">
+                    <div className={theme === "light" ? "card-body bg-dark" :"card-body bg-light"}>
                         <span className="position-absolute top-0 translate-middle badge rounded-pill bg-danger" style={{left: '85%'}}>{source}</span>
-                        <h5 className="card-title">{title}</h5>
-                        <p className="card-text">{description}</p>
+                        <h5 className={theme === "light" ? "card-title text-white" : "card-title text-dark"}>{title}</h5>
+                        <p className={theme === "light" ? "card-text text-white" : "card-text text-dark"}>{description}</p>
                         {/* here we have created a new date obj to change the format we wnat to view.  */}
                         <p className="card-text">
                             <small className="text-muted">
